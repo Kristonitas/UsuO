@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="lt">
 <head>
   <title>Usuo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <h1>
+  <header>
     <%= link_to "usuo", root_path %>
-  </h1>
 
-  <% if user_signed_in? %>
-    <%= link_to('Edit User', edit_registration_path(current_user)) %>
-    <%= link_to('Sign Out', destroy_session_path(current_user), :method => :delete) %>
-  <% else %>
-    <%= link_to('Sign In', new_user_session_path) %>
-    <%= link_to('Sign Up', new_user_registration_path) %>
+    <% if user_signed_in? %>
+      <%= link_to('Edit User', edit_registration_path(current_user)) %>
+      <%= link_to('Sign Out', destroy_session_path(current_user), :method => :delete) %>
+    <% else %>
+      <%= link_to('Sign In', new_user_session_path) %>
+      <%= link_to('Sign Up', new_user_registration_path) %>
+    <% end %>
+
+  </header>
+
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
   <% end %>
 
-</header>
+  <main>
+    <%= yield %>
+  </main>
 
-<p id="notice"><%= notice %></p>
+  <footer>
+    <p>LGMOA 2016</p>
+  </footer>
 
-<main>
-  <%= yield %>
-</main>
-
-<footer>
-  
-</footer>
+  <% if Rails.env.development? %>
+    <%= debug(params)%>
+  <% end %>
 </body>
 </html>

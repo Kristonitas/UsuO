@@ -13,3 +13,27 @@
  ** require_tree .
  *= require_self
  */
+
+html {
+  font-family: "Segoe UI",Arial,sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #CCC;
+}
+
+main {
+  overflow: auto;
+  background-color: #FFF;
+}
+
+header {
+  overflow: auto;
+  background-color: #EEE;
+}
+
+footer {
+  overflow: auto;
+  background-color: #CCC;
+}
