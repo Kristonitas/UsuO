@@ -9,28 +9,36 @@
 </head>
 <body>
   <header>
-    <%= link_to "usuo", root_path %>
 
-    <% if user_signed_in? %>
-      <%= link_to('Edit User', edit_registration_path(current_user)) %>
-      <%= link_to('Sign Out', destroy_session_path(current_user), :method => :delete) %>
-    <% else %>
-      <%= link_to('Sign In', new_user_session_path) %>
-      <%= link_to('Sign Up', new_user_registration_path) %>
-    <% end %>
+    <div class="content">
+
+      <%= link_to "UsuO", root_path, class: "root_path" %>
+
+      <% if user_signed_in? %>
+        <%= link_to('Edit User', edit_registration_path(current_user)) %>
+        <%= link_to('Sign Out', destroy_session_path(current_user), :method => :delete) %>
+      <% else %>
+        <%= link_to('Sign In', new_user_session_path) %>
+        <%= link_to('Sign Up', new_user_registration_path) %>
+      <% end %>
+    
+    </div>
 
   </header>
+  <div id="main">
+  <div class="content">
 
-  <% if notice %>
-    <p id="notice"><%= notice %></p>
-  <% end %>
+    <% if notice %>
+      <p id="notice"><%= notice %></p>
+    <% end %>
 
-  <main>
     <%= yield %>
-  </main>
-
+  </div>
+  </div>
   <footer>
-    <p>LGMOA 2016</p>
+    <div class="content">
+      <p>LGMOA 2016</p>
+    </div>
   </footer>
 
   <% if Rails.env.development? %>
