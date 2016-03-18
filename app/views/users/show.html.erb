@@ -1,1 +1,10 @@
 <h1>Users show</h1>
+<p><%= @user.email %></p>
+
+<h3>Questions</h3>
+
+<% @user.questions.each do |question| %>
+  <article class="question-summary">
+    <h2 class="question-title"><%= link_to question.title, question %></h2>
+  </article>
+<% end %>
