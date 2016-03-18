@@ -15,7 +15,7 @@
       <%= link_to "UsuO", root_path, class: "root_path" %>
 
       <% if user_signed_in? %>
-        <%= link_to('Edit User', edit_registration_path(current_user)) %>
+        <%= link_to('Hi, ' + current_user.name, edit_registration_path(current_user)) %>
         <%= link_to('Sign Out', destroy_session_path(current_user), :method => :delete) %>
       <% else %>
         <%= link_to('Sign In', new_user_session_path) %>

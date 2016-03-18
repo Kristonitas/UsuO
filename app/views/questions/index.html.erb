@@ -3,8 +3,8 @@
 <% @questions.each do |question| %>
   <article class="question-summary">
     <h2 class="question-title"><%= link_to question.title, question %></h2>
+    <p class="question-author">Author: <%= link_to question.user.name, question.user %></p>
     <p class="question-content"><%= truncate question.content, length: 300 %></p>
-    <p class="question-author"><%= link_to question.user.email, question.user %></p>
     
   </article>
 <% end %>
