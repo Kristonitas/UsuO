@@ -25,16 +25,19 @@
     </div>
 
   </header>
+
   <div id="main">
-  <div class="content">
+    <div class="content">
 
-    <% if notice %>
-      <p id="notice"><%= notice %></p>
-    <% end %>
+      <% if notice %>
+        <p id="notice"><%= notice %></p>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
+
+    </div>
   </div>
-  </div>
+
   <footer>
     <div class="content">
       <p>LGMOA 2016</p>
@@ -42,7 +45,9 @@
   </footer>
 
   <% if Rails.env.development? %>
-    <%= debug(params)%>
+    <div id="debug" class="content">
+      <%= debug(params)%>
+    </div>
   <% end %>
 </body>
 </html>

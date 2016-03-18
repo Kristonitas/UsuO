@@ -44,7 +44,6 @@ header a:hover {
 }
 
 footer {
-  overflow: auto;
   background-color: #CCC;
 }
 
@@ -53,14 +52,18 @@ footer p {
 }
 
 .content {
+  padding: 0 8px;
   margin: 0 auto;
   max-width: 800px;
   min-width: 400px;
 }
 
 #main {
-  overflow: auto;
   background-color: #FFF;
+}
+
+#main .content {
+  padding-top: 2em;
 }
 
 a {

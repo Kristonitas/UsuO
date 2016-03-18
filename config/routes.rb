@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :questions
-  resources :questions
-  resources :questions
   root 'questions#index'
-
   resources :questions
+
   devise_for :users
+  get '/users/:id', :to => 'users#show', :as => :user
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
