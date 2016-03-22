@@ -14,6 +14,10 @@
   <%= link_to @question.user.name, @question.user %>
 </p>
 
+<% if user_signed_in? and @question.user == current_user %>
+    <%= link_to 'Edit', edit_question_path(@question) %>
+<% end %>
+
 <% @question.answers.each do |answer| %>
   <article class="answer">
     <div class="answer-content"><%== markdown.render(answer.content) %></div>
@@ -22,15 +26,12 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <% if @question.user == current_user %>
-    <%= link_to 'Edit', edit_question_path(@question) %>
-    <br>
-  <% end %>
-
   <%= form_for [@question, Response.new] do |f| %>
     <div class="field">
-      <%= f.label :content %><br>
-      <div id="epiceditor"></div>
+      <h2>Write an answer</h2>
+      <div  class="epiceditor-container">
+        <div id="epiceditor"></div>
+      </div>
       <%= f.text_area :content, id: "my-edit-area", style: "display: none"%>
     </div>
 
@@ -72,9 +73,8 @@
       autogrow: true
     }
     var editor = new EpicEditor(opts);
-    console.log("Loading Editor")
     editor.load(function () {
-      console.log("Editor loaded.")
+
     });
   }
 
