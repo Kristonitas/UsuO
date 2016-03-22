@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+
   root 'questions#index'
-  resources :questions, param: :id_token
+
+  resources :questions, param: :id_token do
+    post '/answers', :to => 'responses#create', :as => :responses
+    # resources :responses, only: [:new, :create, :edit, :update, :destroy]
+  end
+
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   devise_scope :user do

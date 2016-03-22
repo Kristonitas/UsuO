@@ -13,12 +13,30 @@
   <%= link_to @question.user.name, @question.user %>
 </p>
 
+<% @question.answers.each do |answer| %>
+  <article class="answer">
+    <p class="answer-content"><%== answer.content %></p>
+    <p class="answer-author">Author: <%= link_to answer.user.name, answer.user %> <strong>Edit link? Comment link?</strong></p>
+  </article>
+<% end %>
+
 <% if user_signed_in? %>
   <% if @question.user == current_user %>
     <%= link_to 'Edit', edit_question_path(@question) %>
     <br>
   <% end %>
-  Comment link
+
+  <%= form_for [@question, Response.new] do |f| %>
+    <div class="field">
+      <%= f.label :content %><br>
+      <%= f.text_area :content %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Answer" %>
+    </div>
+  <% end %>
+
 <% else %>
   Sign in to comment
 <% end %>
