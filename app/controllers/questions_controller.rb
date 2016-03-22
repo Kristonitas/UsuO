@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = Question.find(params[:id])
+      @question = Question.find_by(id_token: params[:id_token])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -75,7 +75,6 @@ class QuestionsController < ApplicationController
     end
 
     def confirm_user
-      @micropost = current_user.questions.find_by(id: params[:id])
-      redirect_to root_url if @micropost.nil?
+      redirect_to root_url if not current_user.questions.include?(@question)
     end
 end

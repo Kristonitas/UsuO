@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'questions#index'
-  resources :questions
+  resources :questions, param: :id_token
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   devise_scope :user do
     get '/users/edit/password', :to => 'users/registrations#edit_password', as: :edit_password
   end
-  get '/users/:id', :to => 'users#show', :as => :user
+  get '/users/:id_token', :to => 'users#show', :as => :user
+  get '/users', :to => 'users#index', :as => :users
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
