@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   root 'questions#index'
   resources :questions
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_scope :user do
+    get '/users/edit/password', :to => 'users/registrations#edit_password', as: :edit_password
+  end
   get '/users/:id', :to => 'users#show', :as => :user
 
   devise_for :admin_users, ActiveAdmin::Devise.config

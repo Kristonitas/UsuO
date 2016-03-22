@@ -10,7 +10,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= link_to @question.user.email, @question.user %>
+  <%= link_to @question.user.name, @question.user %>
 </p>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
