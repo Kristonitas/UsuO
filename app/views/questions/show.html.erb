@@ -1,3 +1,4 @@
+<% markdown = new_markdown %>
 <p>
   <strong>Title:</strong>
   <%= @question.title %>
@@ -15,7 +16,7 @@
 
 <% @question.answers.each do |answer| %>
   <article class="answer">
-    <p class="answer-content"><%== answer.content %></p>
+    <div class="answer-content"><%== markdown.render(answer.content) %></div>
     <p class="answer-author">Author: <%= link_to answer.user.name, answer.user %> <strong>Edit link? Comment link?</strong></p>
   </article>
 <% end %>
@@ -29,7 +30,8 @@
   <%= form_for [@question, Response.new] do |f| %>
     <div class="field">
       <%= f.label :content %><br>
-      <%= f.text_area :content %>
+      <div id="epiceditor"></div>
+      <%= f.text_area :content, id: "my-edit-area", style: "display: none"%>
     </div>
 
     <div class="actions">
@@ -37,6 +39,53 @@
     </div>
   <% end %>
 
+  <script>
+  loadEpicEditor = function(event){
+    var opts = {
+      container: 'epiceditor',
+      textarea: 'my-edit-area',
+      basePath: '/epiceditor',
+      clientSideStorage: false,
+      useNativeFullscreen: true,
+      parser: marked,
+      theme: {
+        base: '/themes/base/epiceditor.css',
+        preview: '/themes/preview/github.css',
+        editor: '/themes/editor/epic-light.css'
+      },
+      button: {
+        preview: true,
+        fullscreen: true,
+        bar: "auto"
+      },
+      focusOnLoad: false,
+      shortcut: {
+        modifier: 18,
+        fullscreen: 70,
+        preview: 80
+      },
+      string: {
+        togglePreview: 'Toggle Preview Mode',
+        toggleEdit: 'Toggle Edit Mode',
+        toggleFullscreen: 'Enter Fullscreen'
+      },
+      autogrow: true
+    }
+    var editor = new EpicEditor(opts);
+    console.log("Loading Editor")
+    editor.load(function () {
+      console.log("Editor loaded.")
+    });
+  }
+
+  var ready;
+  ready = function() {
+    loadEpicEditor();
+  };
+
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+  </script>
 <% else %>
   Sign in to comment
 <% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  mount EpicEditor::Engine => "/"
   root 'questions#index'
 
   resources :questions, param: :id_token do
