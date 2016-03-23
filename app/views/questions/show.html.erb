@@ -1,16 +1,13 @@
 <% markdown = new_markdown %>
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
+
+<h2 class="question-title"><%= @question.title %></h2>
+
+<div class="question-content">
+  <%== markdown.render @question.content %>
+</div>
 
 <p>
-  <strong>Content:</strong>
-  <%= @question.content %>
-</p>
-
-<p>
-  <strong>User:</strong>
+  <strong>Author:</strong>
   <%= link_to @question.user.name, @question.user %>
 </p>
 
