@@ -23,7 +23,14 @@
     <div class="answer-content"><%== markdown.render(answer.content) %></div>
     <p class="answer-author">Author: <%= link_to answer.user.name, answer.user %></p>
     <button class="comment-button">Add comment</button>
-    <div class="comment-list"></div>
+    <div class="comment-list">
+      <% answer.comments.each do |comment| %>
+        <article id="comment-<%= comment.id_token %>" class="comment">
+          <div class="comment-content"><%== markdown.render(comment.content) %></div>
+          <p class="comment-author">Author: <%= link_to comment.user.name, comment.user %></p>
+        </article>
+      <% end %>
+    </div>
     <div class="comment-field"></div>
   </article>
 <% end %>
