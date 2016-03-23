@@ -15,17 +15,24 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  
-  username: postgres
-  password: postgres
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  adapter: mysql2
+  encoding: utf8
   pool: 5
+  socket: /var/run/mysqld/mysqld.sock
+  # adapter: postgresql
+  # encoding: unicode
+  
+  # username: postgres
+  # password: postgres
+  # # For details on connection pooling, see rails configuration guide
+  # # http://guides.rubyonrails.org/configuring.html#database-pooling
+  # pool: 5
 
 development:
   <<: *default
+  
+  username: developer
+  password: developer
   database: usuo_development
 
   # The specified database role being used to connect to postgres.
