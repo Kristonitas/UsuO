@@ -7,7 +7,10 @@ class ResponsesController < ApplicationController
   # POST /responses
   # POST /responses.json
   def create
-    @response = @question.answers.build(response_params)
+    @response = @question.answers.build(response_params.except(:target_response_token))
+    if response_params[:target_response_token].present?
+      @response.response = Response.find_by(id_token: response_params[:target_response_token])
+    end
     @response.user = current_user
 
     respond_to do |format|
@@ -57,7 +60,7 @@ class ResponsesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def response_params
-      params.require(:response).permit(:content)
+      params.require(:response).permit(:content, :target_response_token)
     end
 
     def confirm_user

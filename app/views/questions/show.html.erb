@@ -19,73 +19,28 @@
 <% end %>
 
 <% @question.answers.each do |answer| %>
-  <article class="answer">
+  <article id="answer-<%= answer.id_token %>" class="answer">
     <div class="answer-content"><%== markdown.render(answer.content) %></div>
-    <p class="answer-author">Author: <%= link_to answer.user.name, answer.user %> <strong>Edit link? Comment link?</strong></p>
+    <p class="answer-author">Author: <%= link_to answer.user.name, answer.user %></p>
+    <button class="comment-button">Add comment</button>
+    <div class="comment-list"></div>
+    <div class="comment-field"></div>
   </article>
 <% end %>
 
 <% if user_signed_in? %>
   <%= form_for [@question, Response.new] do |f| %>
-    <div class="field">
-      <h2>Write an answer</h2>
-      <div  class="epiceditor-container">
-        <div id="epiceditor"></div>
-      </div>
-      <%= f.text_area :content, id: "my-edit-area", style: "display: none"%>
+    <h2>Write an answer</h2>
+    <div  class="epiceditor-container">
+      <div id="epiceditor"></div>
     </div>
+    <%= f.text_area :content, id: "my-edit-area", style: "display: none"%>
+    <%= f.hidden_field 'target_response_token', value: nil %>
 
     <div class="actions">
       <%= f.submit "Answer" %>
     </div>
   <% end %>
-
-  <script>
-  loadEpicEditor = function(event){
-    var opts = {
-      container: 'epiceditor',
-      textarea: 'my-edit-area',
-      basePath: '/epiceditor',
-      clientSideStorage: false,
-      useNativeFullscreen: true,
-      parser: marked,
-      theme: {
-        base: '/themes/base/epiceditor.css',
-        preview: '/themes/preview/github.css',
-        editor: '/themes/editor/epic-light.css'
-      },
-      button: {
-        preview: true,
-        fullscreen: true,
-        bar: "auto"
-      },
-      focusOnLoad: false,
-      shortcut: {
-        modifier: 18,
-        fullscreen: 70,
-        preview: 80
-      },
-      string: {
-        togglePreview: 'Toggle Preview Mode',
-        toggleEdit: 'Toggle Edit Mode',
-        toggleFullscreen: 'Enter Fullscreen'
-      },
-      autogrow: true
-    }
-    var editor = new EpicEditor(opts);
-    editor.load(function () {
-
-    });
-  }
-
-  var ready;
-  ready = function() {
-    loadEpicEditor();
-  };
-
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
-  </script>
 <% else %>
   Sign in to comment
 <% end %>

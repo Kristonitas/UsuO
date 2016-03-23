@@ -10,4 +10,5 @@ class Response < ActiveRecord::Base
   validates :content, presence: true
   
   has_secure_token :id_token
+  has_many :comments, class_name: "Response"
 end
