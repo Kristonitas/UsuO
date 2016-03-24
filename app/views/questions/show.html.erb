@@ -11,8 +11,13 @@
   <%= link_to @question.user.name, @question.user %>
 </p>
 
-<% @question.tags.each do |tag| %>
-  <p class="answer-tag"><%= link_to tag.name, tag %></p>
+<% if @question.tags.present? %>
+  <h4>Tags</h4>
+  <p class="answer-tags">
+    <% @question.tags.each do |tag| %>
+      <%= link_to tag.name, tag, class: "tag" %>
+    <% end %>
+  </p>
 <% end %>
 
 <% if user_signed_in? and @question.user == current_user %>

@@ -1,14 +1,26 @@
+<% markdown = new_markdown %>
+
 <h1>Questions</h1>
 
 <% @questions.each do |question| %>
   <article class="question-summary">
     <h2 class="question-title"><%= link_to question.title, question %></h2>
     <p class="question-author">Author: <%= link_to question.user.name, question.user %></p>
-    <p class="question-content"><%= truncate question.content, length: 300 %></p>
-    
+
+    <% if question.tags.present? %>
+      <h4>Tags</h4>
+      <p class="answer-tags">
+        <% question.tags.each do |tag| %>
+          <%= link_to tag.name, tag, class: "tag" %>
+        <% end %>
+      </p>
+    <% end %>
+
   </article>
 <% end %>
 
 <br>
 
 <%= link_to 'New Question', new_question_path %>
+
+<hr>
