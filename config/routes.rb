@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   mount EpicEditor::Engine => "/"
   root 'questions#index'
 
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
     # resources :responses, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  get '/tags', :to => 'tags#index', :as => :tags
+  get '/tags/:name', :to => 'tags#show', as: :acts_as_taggable_on_tag
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   devise_scope :user do

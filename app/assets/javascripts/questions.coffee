@@ -54,12 +54,14 @@ enableResponses= () ->
 
   if $('#question_tag_list')
     $('#question_tag_list').selectize
+      maxItems: 5,
+      maxOptions: 10,
       delimiter: ',',
       persist: false,
       create: (input) ->
         return {
-          value: input,
-          text: input
+          value: input.toLowerCase().replace(/ /g,"-"),
+          text: input.toLowerCase().replace(/ /g,"-")
         }
 
 ready= () ->

@@ -12,7 +12,7 @@
 </p>
 
 <% @question.tags.each do |tag| %>
-  <p class="answer-tag"><%= tag.name %></p>
+  <p class="answer-tag"><%= link_to tag.name, tag %></p>
 <% end %>
 
 <% if user_signed_in? and @question.user == current_user %>

@@ -27,8 +27,11 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = current_user.questions.build(question_params)
+    question_params[:tag_list].downcase!
+    question_params[:tag_list].gsub!(/[^0-9a-zą-ž,-]/i, '')
 
+    @question = current_user.questions.build(question_params)
+    
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -43,6 +46,9 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    question_params[:tag_list].downcase!
+    question_params[:tag_list].gsub!(/[^0-9a-zą-ž,-]/i, '')
+    
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }

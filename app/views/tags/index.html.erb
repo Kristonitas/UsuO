@@ -1,0 +1,7 @@
+<h3>Tags</h3>
+
+<% @tags.each do |tag| %>
+  <article class="tag-summary">
+    <h2 class="tag-name"><%= link_to tag.name, tag %></h2>
+  </article>
+<% end %>

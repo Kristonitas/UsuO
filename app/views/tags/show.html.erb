@@ -1,0 +1,10 @@
+<h1><%= @tag.name %></h1>
+<p>Find me in app/views/tags/show.html.erb</p>
+
+<h3>Questions</h3>
+
+<% @questions.each do |question| %>
+  <article class="question-summary">
+    <h2 class="question-title"><%= link_to question.title, question %></h2>
+  </article>
+<% end %>
