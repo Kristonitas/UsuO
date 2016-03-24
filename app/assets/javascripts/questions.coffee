@@ -52,6 +52,15 @@ enableResponses= () ->
       $("#new_response").find('input[id=response_target_response_token]').val('')
       editor.load()
 
+  if $('#question_tag_list')
+    $('#question_tag_list').selectize
+      delimiter: ',',
+      persist: false,
+      create: (input) ->
+        return {
+          value: input,
+          text: input
+        }
 
 ready= () ->
   if $("#epiceditor").length

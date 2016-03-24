@@ -16,3 +16,4 @@
 /// require_tree .
 //= require epiceditor/epiceditor
 //= require questions
+//= require selectize
