@@ -33,12 +33,25 @@ enableResponses= () ->
   editor = new EpicEditor(opts);
   editor.load()
 
-  $(".answer").each (v,k) ->
-    $(k).find('button').click () ->
+  if $('.answer').length
+    $(".answer").each (v,k) ->
+      $(k).find('button').click () ->
+        $("#new_response").find('#response-title').text("Write a comment")
+
+        editor.unload()
+        $("#new_response").appendTo($(k).find(".comment-field"));
+        $("#new_response").find('input[id=response_target_response_token]').val($(k).attr('id').substr(7))
+        editor.load()
+
+  if $('#cancel-comment-button').length
+    $('#cancel-comment-button').click () ->
+      $("#new_response").find('#response-title').text("Write an answer")
+
       editor.unload()
-      $("#new_response").appendTo($(k).find(".comment-field"));
-      $("#new_response").find('input[id=response_target_response_token]').val($(k).attr('id').substr(7))
+      $("#new_response").appendTo($('#answer-container'))
+      $("#new_response").find('input[id=response_target_response_token]').val('')
       editor.load()
+
 
 ready= () ->
   if $("#epiceditor").length

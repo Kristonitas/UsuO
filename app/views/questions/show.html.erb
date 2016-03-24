@@ -33,18 +33,21 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <%= form_for [@question, Response.new] do |f| %>
-    <h2>Write an answer</h2>
-    <div  class="epiceditor-container">
-      <div id="epiceditor"></div>
-    </div>
-    <%= f.text_area :content, id: "my-edit-area", style: "display: none"%>
-    <%= f.hidden_field 'target_response_token', value: nil %>
+  <div id="answer-container">
+    <%= form_for [@question, Response.new] do |f| %>
+      <h2 id="response-title">Write an answer</h2>
+      <div  class="epiceditor-container">
+        <div id="epiceditor"></div>
+      </div>
+      <%= f.text_area :content, id: "my-edit-area", style: "display: none" %>
+      <%= f.hidden_field 'target_response_token', value: nil %>
 
-    <div class="actions">
-      <%= f.submit "Answer" %>
-    </div>
-  <% end %>
+      <div class="actions">
+        <%= f.submit "Submit" %>
+        <button type='button' id="cancel-comment-button">Cancel</button>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   Sign in to comment
 <% end %>

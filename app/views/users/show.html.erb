@@ -1,6 +1,12 @@
+<% markdown = new_markdown %>
+
 <h2><%= @user.name %></h2>
 
-<p><%= @user.description %></p>
+<p><%== markdown.render(@user.description) %></p>
+
+<% if user_signed_in? and @user == current_user %>
+  <h4><%= link_to 'Edit', edit_registration_path(current_user) %></h4>
+<% end %>
 
 <h3>Questions</h3>
 

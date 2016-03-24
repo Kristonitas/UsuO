@@ -9,8 +9,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <div  class="epiceditor-container">
+      <div id="epiceditor"></div>
+    </div>
+    <%= f.text_area :description, id: "my-edit-area", style: "display: none" %>
   </div>
 
   <div class="field">

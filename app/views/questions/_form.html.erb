@@ -16,8 +16,10 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <div  class="epiceditor-container">
+      <div id="epiceditor"></div>
+    </div>
+    <%= f.text_area :content, id: "my-edit-area", style: "display: none" %>
   </div>
   <div class="actions">
     <%= f.submit %>
