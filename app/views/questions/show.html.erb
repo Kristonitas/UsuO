@@ -11,6 +11,10 @@
   <%= link_to @question.user.name, @question.user %>
 </p>
 
+<% @question.tags.each do |tag| %>
+  <p class="answer-tag"><%= tag.name %></p>
+<% end %>
+
 <% if user_signed_in? and @question.user == current_user %>
     <%= link_to 'Edit', edit_question_path(@question) %>
 <% end %>
@@ -19,6 +23,7 @@
   <article id="answer-<%= answer.id_token %>" class="answer">
     <div class="answer-content"><%== markdown.render(answer.content) %></div>
     <p class="answer-author">Author: <%= link_to answer.user.name, answer.user %></p>
+
     <button class="comment-button">Add comment</button>
     <div class="comment-list">
       <% answer.comments.each do |comment| %>

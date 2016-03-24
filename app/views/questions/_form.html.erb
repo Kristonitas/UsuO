@@ -15,11 +15,17 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
   <div class="field">
     <div  class="epiceditor-container">
       <div id="epiceditor"></div>
     </div>
     <%= f.text_area :content, id: "my-edit-area", style: "display: none" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tag_list %><br>
+    <%= f.text_field :tag_list, value: @question.tag_list.join(', ') %>
   </div>
   <div class="actions">
     <%= f.submit %>

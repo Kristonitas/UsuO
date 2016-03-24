@@ -1,5 +1,7 @@
 class Question < ActiveRecord::Base
   has_secure_token :id_token
+  acts_as_taggable
+  
   belongs_to :user
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true

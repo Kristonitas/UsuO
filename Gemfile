@@ -30,6 +30,7 @@ gem 'has_secure_token'
 
 gem 'redcarpet'
 gem 'epiceditor', '~> 0.2.2'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
